@@ -100,23 +100,39 @@ def generate_features(implementation_version, draw_graphs, raw_data, axes, sampl
                 'type': 'image'
             })
 
-        # all_features = all_features + [ float(x / 255) for x in edges.flatten().tolist() ]
-
+    # all_features = all_features + [ float(x / 255) for x in edges.flatten().tolist() ]
+    
+    ### %%%SRH%%% Modify output to be flat "image" data to trick Studio
+    all_features = keypoints_with_scores.flatten()
     return {
-        # 'features': [ int(x) for x in all_features ],
-        'features': keypoints_with_scores.flatten(),
+        'features': all_features,
         'graphs': graphs,
         'output_config': {
+            'type': 'image',
+            'shape': {
+                'width': len(all_features),
+                'height': int(1),
+                'channels': 1
+            }
+        }
+    }
+
+    #return {
+        # 'features': [ int(x) for x in all_features ],
+    #    'features': keypoints_with_scores.flatten(),
+    #    'graphs': graphs,
+    #    'output_config': {
             # type can be 'flat', 'image' or 'spectrogram'
-            'type': 'flat',
+    #        'type': 'flat',
             # 'shape': {
             #     # shape should be { width, height, channels } for image, { width, height } for spectrogram
             #     'width': int(width),
             #     'height': int(height),
             #     'channels': 1
             # }
-        }
-    }
+    #    }
+    #}
+    ### %%%END%%%
 
 # Dictionary that maps from joint names to keypoint indices.
 KEYPOINT_DICT = {
@@ -248,7 +264,10 @@ def draw_prediction_on_image(
   ax.set_xticklabels([])
   plt.axis('off')
 
-  im = ax.imshow(image)
+  # %%%SRH%%% Convert image from RGB to BGR before displaying it
+  im = ax.imshow(cv2.cvtColor(image, cv2.COLOR_RGB2BGR))
+  #im = ax.imshow(image)
+  # %%%END%%%
   line_segments = LineCollection([], linewidths=(4), linestyle='solid')
   ax.add_collection(line_segments)
   # Turn off tick labels
