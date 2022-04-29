@@ -116,7 +116,7 @@ def generate_features(implementation_version, draw_graphs, raw_data, axes, sampl
             }
         }
     }
-
+    
     #return {
         # 'features': [ int(x) for x in all_features ],
     #    'features': keypoints_with_scores.flatten(),
