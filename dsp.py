@@ -77,6 +77,9 @@ def generate_features(implementation_version, draw_graphs, raw_data, axes, sampl
         # Output is a [1, 1, 17, 3] numpy array.
         keypoints_with_scores = movenet(np.expand_dims(frame, axis=0))
 
+        scaling_factor = 15/2
+        keypoints_with_scores = scaling_factor * keypoints_with_scores
+
         # convert to grayscale
         # img_gray = cv2.cvtColor(np.array(img), cv2.COLOR_BGR2GRAY)
         # # blur the image for better edge detection
