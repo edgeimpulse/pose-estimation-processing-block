@@ -1,6 +1,6 @@
 # Pose estimation processing block
 
-This implements a pose estimation [processing block](https://docs.edgeimpulse.com/docs/custom-blocks) based on [PoseNet](https://github.com/tensorflow/tfjs-models/tree/master/pose-detection) in Edge Impulse. Use this block to turn raw images into pose vectors, then pair it with an ML block to detect what a person is doing.
+This implements a pose estimation [processing block](https://docs.edgeimpulse.com/docs/custom-blocks) based on [MoveNet](https://github.com/tensorflow/tfjs-models/tree/master/pose-detection) in Edge Impulse. Use this block to turn raw images into pose vectors, then pair it with an ML block to detect what a person is doing.
 
 ## How to run this block (locally)
 
