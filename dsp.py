@@ -79,7 +79,8 @@ def generate_features(implementation_version, draw_graphs, raw_data, axes, sampl
 
         scaling_factor = 15/2
         keypoints_with_scores = scaling_factor * keypoints_with_scores
-        keypoints_with_scores = keypoints_with_scores.astype(int)
+        keypoints_with_scores = keypoints_with_scores.round()
+        keypoints_with_scores = keypoints_with_scores.astype(int)   
 
         # convert to grayscale
         # img_gray = cv2.cvtColor(np.array(img), cv2.COLOR_BGR2GRAY)
