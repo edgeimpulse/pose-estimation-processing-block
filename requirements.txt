@@ -1,0 +1,7 @@
+tensorflow==2.10.0
+h5py==3.7.0
+matplotlib==3.6.3
+numpy==1.24.1
+opencv-contrib-python==4.7.0.68
+opencv-python==4.7.0.68
+Pillow==9.4.0

@@ -1,8 +1,9 @@
 {
     "version": 1,
+    "type": "dsp",
     "info": {
         "title": "Pose estimation",
-        "author": "Daniel Situnayake",
+        "author": "Edge Impulse",
         "description": "Pose estimation for images",
         "name": "Pose estimation",
         "cppType": "pose_estimation",

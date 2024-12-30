@@ -48,8 +48,6 @@ Note: this flow is only available for enterprise customers.
 
     ```
     $ edge-impulse-blocks init
-
-    # Pick "DSP block" for 'Choose a type of block'
     ```
 
 1. Push the block via:

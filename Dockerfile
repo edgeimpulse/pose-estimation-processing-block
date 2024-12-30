@@ -9,16 +9,12 @@ RUN apt update && apt install -y curl wget ffmpeg libsm6 libxext6 zlib1g-dev pyt
 
 # Install pip
 RUN wget https://bootstrap.pypa.io/get-pip.py && \
-    python3.8 get-pip.py "pip==21.3.1"
-
-# We may need a specific TensorFlow version depending on our architecture
-COPY install_tensorflow.sh ./install_tensorflow.sh
-RUN ./install_tensorflow.sh && \
-    rm install_tensorflow.sh
+    python3.8 get-pip.py "pip==21.3.1" "setuptools==62.6.0"
 
 # Other Python dependencies
-COPY requirements-blocks.txt ./
-RUN pip3.8 --no-cache-dir install -r requirements-blocks.txt
+COPY requirements.txt ./
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip3.8 install -r requirements.txt
 
 # Rest of the app
 COPY . ./
