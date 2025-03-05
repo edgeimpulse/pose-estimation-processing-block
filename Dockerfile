@@ -19,6 +19,6 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 # Rest of the app
 COPY . ./
 
-EXPOSE 4449
+EXPOSE 4446
 
 CMD python3.8 -u dsp-server.py

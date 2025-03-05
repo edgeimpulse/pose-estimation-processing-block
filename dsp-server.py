@@ -193,7 +193,7 @@ class ThreadingSimpleServer(ThreadingMixIn, HTTPServer):
 
 def run():
     host = '0.0.0.0' if not 'HOST' in os.environ else os.environ['HOST']
-    port = 4449 if not 'PORT' in os.environ else int(os.environ['PORT'])
+    port = 4446 if not 'PORT' in os.environ else int(os.environ['PORT'])
 
     server = ThreadingSimpleServer((host, port), Handler)
     print('Listening on host', host, 'port', port)

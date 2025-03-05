@@ -14,19 +14,19 @@ This implements a pose estimation [processing block](https://docs.edgeimpulse.co
     1. Run the block:
 
         ```
-        $ docker run -p 4449:4449 -it --rm  edge-detection-block
+        $ docker run -p 4446:4446 -it --rm  edge-detection-block
         ```
 
-1. Install [ngrok](https://ngrok.com) and open up port 4449 to the world:
+1. Install [ngrok](https://ngrok.com) and open up port 4446 to the world:
 
     ```
-    $ ngrok http 4449
+    $ ngrok http 4446
     ```
 
     Note down the 'Forwarding' address that starts with https, e.g.:
 
     ```
-    Forwarding                    https://4e9e1e61e3aa.ngrok.io -> http://localhost:4449
+    Forwarding                    https://4e9e1e61e3aa.ngrok.io -> http://localhost:4446
     ```
 
 1. In Edge Impulse, go to **Create impulse**, then:
