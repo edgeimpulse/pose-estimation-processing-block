@@ -4,14 +4,15 @@
     "info": {
         "title": "Pose estimation",
         "author": "Edge Impulse",
-        "description": "Pose estimation for images",
+        "description": "Pose estimation for images, only works on 192x192 inputs",
         "name": "Pose estimation",
         "cppType": "pose_estimation",
         "preferConvolution": false,
         "visualization": "dimensionalityReduction",
         "experimental": false,
         "hasTfliteImplementation": true,
-        "latestImplementationVersion": 1
+        "latestImplementationVersion": 1,
+        "port": 4449
     },
     "parameters": []
 }
