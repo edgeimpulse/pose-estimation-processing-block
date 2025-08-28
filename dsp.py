@@ -14,12 +14,15 @@ matplotlib.use('Agg')
 
 curr_dir = os.path.dirname(os.path.realpath(__file__))
 
+interpreter = tf.lite.Interpreter(model_path=os.path.join(curr_dir, "model.tflite"))
+interpreter.allocate_tensors()
+
 def generate_features(implementation_version, draw_graphs, raw_data, axes, sampling_freq):
     graphs = []
     all_features = []
 
-    width = raw_data[0]
-    height = raw_data[1]
+    width = int(raw_data[0])
+    height = int(raw_data[1])
     raw_data = np.array(raw_data[2:]).astype(dtype=np.uint32).view(dtype=np.uint8)
 
     if width != 192 or height != 192:
@@ -27,7 +30,7 @@ def generate_features(implementation_version, draw_graphs, raw_data, axes, sampl
 
     pixels_per_frame = height * width * 4
     frame_count = 0
-    expected_frame_count = len(raw_data) / pixels_per_frame
+    expected_frame_count = int(len(raw_data) / pixels_per_frame)
 
     for i in np.arange(0, len(raw_data), pixels_per_frame):
         frame = raw_data[i:i+pixels_per_frame]
@@ -44,9 +47,6 @@ def generate_features(implementation_version, draw_graphs, raw_data, axes, sampl
 
         # this is now the correct image, already reshaped
         frame = np.array(pixels).astype(np.uint8).reshape((width, height, 3))
-
-        interpreter = tf.lite.Interpreter(model_path=os.path.join(curr_dir, "model.tflite"))
-        interpreter.allocate_tensors()
 
         # https://www.tensorflow.org/hub/tutorials/movenet
 

@@ -2,3 +2,7 @@ __pycache__/
 .ei-block-config
 .DS_Store
 .venv/
+input.txt
+*.npy
+metadata_out.json
+convert_input.py
