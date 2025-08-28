@@ -13,7 +13,24 @@
         "hasTfliteImplementation": true,
         "latestImplementationVersion": 1,
         "port": 4449,
-        "jobEntrypoint": "dsp-process-dataset.py"
+        "dontAllowDataNormalization": true,
+        "jobEntrypoint": {
+            "command": "python3.8",
+            "args": [ "-u", "dsp-process-dataset.py" ]
+        }
     },
-    "parameters": []
+    "parameters": [
+        {
+            "group": "Visualization",
+            "items": [
+                {
+                    "name": "Line width",
+                    "value": 4,
+                    "type": "int",
+                    "help": "Line width in the preview",
+                    "param": "line_width"
+                }
+            ]
+        }
+    ]
 }

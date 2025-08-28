@@ -6,3 +6,4 @@ input.txt
 *.npy
 metadata_out.json
 convert_input.py
+parse-params.py

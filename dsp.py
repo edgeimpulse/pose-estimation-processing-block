@@ -17,7 +17,7 @@ curr_dir = os.path.dirname(os.path.realpath(__file__))
 interpreter = tf.lite.Interpreter(model_path=os.path.join(curr_dir, "model.tflite"))
 interpreter.allocate_tensors()
 
-def generate_features(implementation_version, draw_graphs, raw_data, axes, sampling_freq):
+def generate_features(implementation_version, draw_graphs, raw_data, axes, sampling_freq, line_width):
     graphs = []
     all_features = []
 
@@ -86,7 +86,7 @@ def generate_features(implementation_version, draw_graphs, raw_data, axes, sampl
 
         if draw_graphs:
             output_overlay = draw_prediction_on_image(
-                np.squeeze(frame), keypoints_with_scores)
+                np.squeeze(frame), keypoints_with_scores, line_width)
 
             im = Image.fromarray(output_overlay).convert(mode='RGBA')
             buf = io.BytesIO()
@@ -227,7 +227,7 @@ def _keypoints_and_edges_for_display(keypoints_with_scores,
 
 
 def draw_prediction_on_image(
-    image, keypoints_with_scores, crop_region=None, close_figure=False,
+    image, keypoints_with_scores, line_width=1, crop_region=None, close_figure=False,
     output_image_height=None):
   """Draws the keypoint predictions on image.
 
@@ -258,7 +258,7 @@ def draw_prediction_on_image(
   plt.axis('off')
 
   im = ax.imshow(image)
-  line_segments = LineCollection([], linewidths=(4), linestyle='solid')
+  line_segments = LineCollection([], linewidths=(line_width), linestyle='solid')
   ax.add_collection(line_segments)
   # Turn off tick labels
   scat = ax.scatter([], [], s=60, color='#FF1493', zorder=3)
@@ -282,7 +282,7 @@ def draw_prediction_on_image(
     rec_height = min(crop_region['y_max'], 0.99) * height - ymin
     rect = patches.Rectangle(
         (xmin,ymin),rec_width,rec_height,
-        linewidth=1,edgecolor='b',facecolor='none')
+        linewidth=line_width,edgecolor='b',facecolor='none')
     ax.add_patch(rect)
 
   fig.canvas.draw()

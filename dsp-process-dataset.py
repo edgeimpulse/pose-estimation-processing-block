@@ -20,8 +20,33 @@ def exit_gracefully(signum, frame):
 signal.signal(signal.SIGINT, exit_gracefully)
 signal.signal(signal.SIGTERM, exit_gracefully)
 
-print('args', args)
-print('unknown', unknown)
+curr_dir = os.path.dirname(os.path.realpath(__file__))
+
+param_mapping = {}
+with open(os.path.join(curr_dir, 'parameters.json'), 'r') as f:
+    param_file = json.loads(f.read())
+    for group in param_file['parameters']:
+        for item in group['items']:
+            param_mapping[item['param']] = item
+
+extra_kwargs = {}
+
+for i in np.arange(0, len(unknown), step=2):
+    key = unknown[i].replace('--', '')
+    value = unknown[i + 1]
+    if not key in param_mapping.keys():
+        print('Cannot find key "' + key + '" in parameters.json')
+        sys.exit(1)
+
+    param = param_mapping[key]
+    if value == 'None':
+        extra_kwargs[key] = None
+    elif (param['type'] == 'int'):
+        extra_kwargs[key] = int(value)
+    elif (param['type'] == 'float'):
+        extra_kwargs[key] = float(value)
+    else:
+        extra_kwargs[key] = value
 
 in_file_x = args.in_file_x
 outFileX = args.out_file_x
@@ -59,7 +84,8 @@ for example in X_train:
     }
     if args.uses_state:
         kwargs['state'] = state
-
+    for k in extra_kwargs.keys():
+        kwargs[k] = extra_kwargs[k]
 
     f = generate_features(**kwargs)
 
