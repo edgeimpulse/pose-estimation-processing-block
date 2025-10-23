@@ -8,7 +8,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt install -y curl wget ffmpeg libsm6 libxext6 zlib1g-dev python3.8 libpython3.8 python3.8-distutils
 
 # Install pip
-RUN wget https://bootstrap.pypa.io/get-pip.py && \
+RUN wget https://bootstrap.pypa.io/pip/3.8/get-pip.py && \
     python3.8 get-pip.py "pip==21.3.1" "setuptools==62.6.0"
 
 # Other Python dependencies

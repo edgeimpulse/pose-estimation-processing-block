@@ -12,7 +12,7 @@
         "experimental": false,
         "hasTfliteImplementation": true,
         "latestImplementationVersion": 1,
-        "port": 4449
+        "port": 4446
     },
     "parameters": []
 }
