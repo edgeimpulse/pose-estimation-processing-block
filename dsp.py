@@ -302,6 +302,16 @@ def get_tflite_implementation(implementation_version, input_shape, axes, samplin
     # here we have a pretrained model, but you could use JAX to generate this
     with open(os.path.join(curr_dir, "model.tflite"), 'rb') as f:
         return f.read()
+    
+def process(data, windows, labels):
+    result = generate_features(
+        implementation_version = 1,
+        draw_graphs = False,
+        raw_data = data,
+        axes = [],
+        sampling_freq = 0
+    )
+    return result['features'], labels
 
 if __name__ == "__main__":
     features = [
