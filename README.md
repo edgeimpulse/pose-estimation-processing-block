@@ -75,3 +75,31 @@ This block will run on Linux devices as-is. Just deploy as usual from the Studio
 Due to the size of the model and some unsupported ops it won't work on MCU in its current form. If you decide to train a smaller custom model, you'll need to replace `model.tflite`. You'll get feedback on the model through the 'On-device performance widget' in the Studio:
 
 <img src="images/ondevice-perf.png" width="659" title="On-device performance">
+
+
+
+## Troubleshooting
+
+### AttributeError: 'NoneType' object has no attribute 'shape'
+
+```
+Creating features using server :
+Traceback (most recent call last):
+File "/home/create_features.py", line 122, in
+sample_labels_file = np.lib.format.open_memmap(sampleLabelFile, mode=('r+' if os.path.exists(sampleLabelFile) else 'w+'), dtype='int64', shape=(sample_rows, Y_train.shape[1]))
+AttributeError: 'NoneType' object has no attribute 'shape'
+Application exited with code 1
+Application exited with code 1
+Job failed (see above)
+```
+
+This error typically occurs because the DSP block did not return labels (Y) during feature generation. This can happen if:
+
+* You are using this block for object detection but haven't returned bounding box labels.
+
+* You are using classification, but your samples lack class labels.
+
+* Finally go to your project dashboard and set the labelling to 'one label per item'
+
+See the related forum post [here](https://forum.edgeimpulse.com/t/pose-estimation-model-create-features-is-not-working/17204)
+
